@@ -1,3 +1,5 @@
+const url = `https://api.themoviedb.org/3/movie/popular?api_key=fe9a692601a10b1c8f689d99796cbb82&language=en-US&page=1`;
+
 const moviesRequest = callback => {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
@@ -7,13 +9,10 @@ const moviesRequest = callback => {
       callback(movies);
     }
   };
-  xhr.open(
-    "GET",
-    "https://api.themoviedb.org/3/movie/popular?api_key=fe9a692601a10b1c8f689d99796cbb82&language=en-US&page=1"
-  );
+  xhr.open("GET", url);
   xhr.send();
 };
 
 if (typeof module !== "undefined") {
-  module.exports = moviesRequest;
+  module.exports = { moviesRequest, pages };
 }
