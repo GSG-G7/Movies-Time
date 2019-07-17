@@ -52,7 +52,9 @@ getNews(arr => {
 
 const createMovie = obj => {
   let movieDiv = document.createElement("div");
+  let infoDiv = document.createElement("div");
   movieDiv.classList.add("movie-card");
+  infoDiv.classList.add("movie-info");
   let movieTitle = element("h2", obj.title);
   let moviePoster = document.createElement("img");
   let movieLang = element("span", obj.lang);
@@ -61,11 +63,12 @@ const createMovie = obj => {
   moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${
     obj.poster
   }`;
-  movieDiv.appendChild(movieTitle);
+  infoDiv.appendChild(movieTitle);
   movieDiv.appendChild(moviePoster);
-  movieDiv.appendChild(movieLang);
-  movieDiv.appendChild(moviePar);
-  movieDiv.appendChild(movieDate);
+  infoDiv.appendChild(movieLang);
+  infoDiv.appendChild(moviePar);
+  infoDiv.appendChild(movieDate);
+  movieDiv.appendChild(infoDiv);
   moviesSection.appendChild(movieDiv);
 };
 
@@ -79,6 +82,7 @@ const element = (e, content) => {
 
 function showNews(obj) {
   const newsbox = document.createElement("div");
+  newsbox.classList.add("news-card");
   const newsImag = document.createElement("img");
   const title = document.createElement("h2");
   const desc = document.createElement("p");
