@@ -27,5 +27,5 @@ function getNews(callback) {
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { moviesRequest, pages };
+  module.exports = { request };
 }
