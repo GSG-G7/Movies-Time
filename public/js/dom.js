@@ -55,6 +55,7 @@ const createMovie = obj => {
   movieDiv.classList.add("movie-card");
   let movieTitle = element("h2", obj.title);
   let moviePoster = document.createElement("img");
+  moviePoster.setAttribute("alt", "moviesImages");
   let movieLang = element("span", obj.lang);
   let moviePar = element("p", obj.overview);
   let movieDate = element("span", obj.releaseDate);
@@ -86,6 +87,7 @@ function showNews(obj) {
 
   // Set attributes
   newsImag.setAttribute("src", obj.imageLink);
+  newsImag.setAttribute("alt", "NewsImage");
   title.textContent = obj.title;
   desc.textContent = obj.description;
   source.textContent = "Read More";
