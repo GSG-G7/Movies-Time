@@ -3,26 +3,67 @@ const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 const newsContainer = document.getElementById("news");
 
-// Adding the movies to the HTML
-moviesRequest(movies => {
-  movies.forEach(movie => {
-    createMovie(
-      movie.title,
-      movie.poster_path,
-      movie.original_language,
-      movie.overview,
-      movie.release_date
-    );
-  });
-});
-const createMovie = (title, poster, lang, overview, release_date) => {
+getMovies((arr)=>{
+  const movieArr = [];
+  arr.some((element , index)=>{
+    movieArr.push({
+      title: element.title,
+      poster: element.poster_path,
+      lang: element.original_language,
+      overview: element.overview,
+      releaseDate: element.release_date,
+      
+
+    })
+    return index === 11;
+  })
+
+  manageRender("movie" , movieArr);
+
+})
+
+function manageRender(check , arr){
+
+  if(check === 'movie'){
+    arr.forEach((element)=>{
+      createMovie(element);
+    })
+  }
+  else if( check === 'news'){
+    arr.forEach((element)=>{
+      showNews(element);
+    })
+  }
+}
+
+getNews((arr)=>{
+  const newsArr = [];
+  // This Method for get specific number of element from original array
+  arr.some((element , index)=>{
+    newsArr.push({
+      imageLink: element.urlToImage,
+      title: element.title,
+      description: element.description,
+      source: element.url,
+      author: element.author,
+      published: element.publishedAt
+    })
+
+    return index === 5;
+  })
+
+  manageRender('news' , newsArr)
+})
+  
+
+const createMovie = (obj) => {
   let movieDiv = document.createElement("div");
-  let movieTitle = element("h2", title);
+  let movieTitle = element("h2", obj.title);
   let moviePoster = document.createElement("img");
-  let movieLang = element("span", lang);
-  let moviePar = element("p", overview);
-  let movieDate = element("span", release_date);
-  moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${poster}`;
+  let movieLang = element("span", obj.lang);
+  let moviePar = element("p", obj.overview);
+  let movieDate = element("span", obj.releaseDate);
+  moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${obj.poster}`;
   movieDiv.appendChild(movieTitle);
   movieDiv.appendChild(moviePoster);
   movieDiv.appendChild(movieLang);
@@ -61,26 +102,3 @@ function showNews(obj) {
 
   newsContainer.appendChild(newsbox);
 }
-
-function fetchNews(newArr) {
-  newArr.forEach(element => {
-    showNews(element);
-  });
-}
-
-getNews(queryNews, news => {
-  const newArr = [];
-
-  for (let i = 0; i < 6; i++) {
-    let obj = {
-      imageLink: news[i].urlToImage,
-      title: news[i].title,
-      description: news[i].description,
-      source: news[i].url,
-      author: news[i].author,
-      published: news[i].publishedAt
-    };
-    newArr.push(obj);
-  }
-  fetchNews(newArr);
-});
