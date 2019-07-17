@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const urlMovies = `https://api.themoviedb.org/3/movie/popular?api_key=fe9a692601a10b1c8f689d99796cbb82&language=en-US&page=1`;
 
 const urlNews = "https://newsapi.org/v2/everything?";
@@ -31,7 +31,7 @@ const moviesRequest = callback => {
     xhr.open("GET", urlMovies);
     xhr.send();
 };
-=======
+
 function request(url, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = _ => {
@@ -59,7 +59,6 @@ function getNews(callback) {
     callback(obj.articles);
   });
 }
->>>>>>> 63760abea9b04d06047c1d2365a693fc465e5023
 
 if (typeof module !== "undefined") {
     module.exports = { moviesRequest, pages };
