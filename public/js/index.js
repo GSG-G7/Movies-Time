@@ -1,11 +1,12 @@
 const urlMovies = `https://api.themoviedb.org/3/movie/popular?api_key=fe9a692601a10b1c8f689d99796cbb82&language=en-US&page=1`;
 
 const urlNews = "https://newsapi.org/v2/everything?";
-const queryNews = "q=movie&from=2019-06-16&sortBy=publishedAt";
+const queryNews = "q=movie";
 const newsAPI_key = "&apiKey=c97ecb4a147a402899bf700fb3acf8e5";
 
+// Requesting the News API
 function getNews(query, callback) {
-  const newsUrl = urlNews + query + newsAPI_key;
+  const newsUrl = urlNews + queryNews + newsAPI_key;
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = _ => {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -18,6 +19,7 @@ function getNews(query, callback) {
   xhr.send();
 }
 
+// Requesting the MovieDB API
 const moviesRequest = callback => {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {

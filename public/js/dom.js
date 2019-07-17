@@ -17,6 +17,7 @@ moviesRequest(movies => {
 });
 const createMovie = (title, poster, lang, overview, release_date) => {
   let movieDiv = document.createElement("div");
+  movieDiv.classList.add("movie-card");
   let movieTitle = element("h2", title);
   let moviePoster = document.createElement("img");
   let movieLang = element("span", lang);
@@ -35,6 +36,7 @@ const createMovie = (title, poster, lang, overview, release_date) => {
 const element = (e, content) => {
   let x = document.createElement(e);
   x.textContent = content;
+  x.className = "movie-content";
   return x;
 };
 
