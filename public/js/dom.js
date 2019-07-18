@@ -4,18 +4,7 @@ const prevBtn = document.querySelector(".prev");
 const newsContainer = document.getElementById("news");
 
 getMovies(arr => {
-  const movieArr = [];
-  arr.some((element, index) => {
-    movieArr.push({
-      title: element.title,
-      poster: element.poster_path,
-      lang: element.original_language,
-      overview: element.overview,
-      releaseDate: element.release_date
-    });
-    return index === 11;
-  });
-
+  let movieArr = specificNumber(arr, 12);
   manageRender("movie", movieArr);
 });
 
@@ -32,21 +21,7 @@ function manageRender(check, arr) {
 }
 
 getNews(arr => {
-  const newsArr = [];
-  // This Method for get specific number of element from original array
-  arr.some((element, index) => {
-    newsArr.push({
-      imageLink: element.urlToImage,
-      title: element.title,
-      description: element.description,
-      source: element.url,
-      author: element.author,
-      published: element.publishedAt
-    });
-
-    return index === 5;
-  });
-
+  let newsArr = specificNumber(arr, 5);
   manageRender("news", newsArr);
 });
 
@@ -58,11 +33,11 @@ const createMovie = obj => {
   let movieTitle = element("h2", obj.title);
   let moviePoster = document.createElement("img");
   moviePoster.setAttribute("alt", "moviesImages");
-  let movieLang = element("span", obj.lang);
+  let movieLang = element("span", obj.original_language);
   let moviePar = element("p", obj.overview);
-  let movieDate = element("span", obj.releaseDate);
+  let movieDate = element("span", obj.release_date);
   moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${
-    obj.poster
+    obj.poster_path
   }`;
   infoDiv.appendChild(movieTitle);
   movieDiv.appendChild(moviePoster);
@@ -90,7 +65,7 @@ function showNews(obj) {
   const source = document.createElement("a");
 
   // Set attributes
-  newsImag.setAttribute("src", obj.imageLink);
+  newsImag.setAttribute("src", obj.urlToImage);
   newsImag.setAttribute("alt", "NewsImage");
   title.textContent = obj.title;
   desc.textContent = obj.description;
