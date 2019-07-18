@@ -4,20 +4,7 @@ const prevBtn = document.querySelector(".prev");
 const newsContainer = document.getElementById("news");
 
 getMovies(arr => {
-    const movieArr = [];
-    arr.some((element, index) => {
-        movieArr.push({
-            title: element.title,
-            poster: element.poster_path,
-            lang: element.original_language,
-            overview: element.overview,
-            releaseDate: element.release_date,
-            movieId: element.id
-        });
-        return index === 11;
-
-    });
-
+    let movieArr = specificNumber(arr, 12);
     manageRender("movie", movieArr);
 });
 
@@ -34,29 +21,12 @@ function manageRender(check, arr) {
 }
 
 getNews(arr => {
-    const newsArr = [];
-    // This Method for get specific number of element from original array
-    arr.some((element, index) => {
-        newsArr.push({
-            imageLink: element.urlToImage,
-            title: element.title,
-            description: element.description,
-            source: element.url,
-            author: element.author,
-            published: element.publishedAt
-        });
-
-        return index === 5;
-    });
-
+    let newsArr = specificNumber(arr, 5);
     manageRender("news", newsArr);
 });
-/* getTrialers(arr,key) => {
-    
-  
-}); */
 
 const createMovie = obj => {
+
     const movieDiv = document.createElement("div");
     const infoDiv = document.createElement("div");
     movieDiv.classList.add("movie-card");
@@ -64,17 +34,17 @@ const createMovie = obj => {
     const movieTitle = element("h2", obj.title);
     const moviePoster = document.createElement("img");
     moviePoster.setAttribute("alt", "moviesImages");
-    const movieLang = element("span", obj.lang);
+    const movieLang = element("span", obj.original_language);
     const langheading = element("p", "Language :  ");
     langheading.appendChild(movieLang);
     const moviePar = element("p", obj.overview);
     const overviewheading = element("p", "Overview :  ");
     overviewheading.appendChild(moviePar);
-    const movieDate = element("span", obj.releaseDate);
+    const movieDate = element("span", obj.release_date);
     const releaseDateheading = element("p", "Release Date:  ");
     releaseDateheading.appendChild(movieDate);
 
-    moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${obj.poster}`;
+    moviePoster.src = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${obj.poster_path}`;
     infoDiv.appendChild(movieTitle);
     movieDiv.appendChild(moviePoster);
     infoDiv.appendChild(langheading);
@@ -82,6 +52,7 @@ const createMovie = obj => {
     infoDiv.appendChild(releaseDateheading);
     movieDiv.appendChild(infoDiv);
     moviesSection.appendChild(movieDiv);
+
 };
 
 
@@ -103,7 +74,7 @@ function showNews(obj) {
     const source = document.createElement("a");
 
     // Set attributes
-    newsImag.setAttribute("src", obj.imageLink);
+    newsImag.setAttribute("src", obj.urlToImage);
     newsImag.setAttribute("alt", "NewsImage");
     title.textContent = obj.title;
     desc.textContent = obj.description;

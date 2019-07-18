@@ -19,23 +19,12 @@ function getMovies(callback) {
 }
 
 function getNews(callback) {
-    const url =
-        "https://newsapi.org/v2/everything?q=movie&apiKey=c97ecb4a147a402899bf700fb3acf8e5";
+    const url = `https://newsapi.org/v2/everything?q=movie&apiKey=c97ecb4a147a402899bf700fb3acf8e5`;
     request(url, obj => {
         callback(obj.articles);
     });
 }
 
-function getTrialers(callback) {
-    const url =
-        `http://api.themoviedb.org/3/movie/429617/videos?api_key=fe9a692601a10b1c8f689d99796cbb82`;
-    request(url, obj => {
-        console.log(obj);
-        callback(obj);
-
-    });
-}
-
-if (typeof module !== "undefined") {
-    module.exports = { moviesRequest, pages };
+function specificNumber(arr, num) {
+    return arr.slice(0, num);
 }
